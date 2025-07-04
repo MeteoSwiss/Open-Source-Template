@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: open_source_template",
+            "type": "python",
+            "request": "launch",
+            "program": "open_source_template/main.py",
+            "env": { "PYTHONPATH": "." },
+            "justMyCode": false,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: Debug Unit Tests",
+            "type": "python",
+            "request": "launch",
+            "purpose": ["debug-test"],
+            "console": "integratedTerminal",
+            "env": {
+                "PYTEST_ADDOPTS": "--no-cov"
+            },
+            "justMyCode": false
+        }
+    ]
+}

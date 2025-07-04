@@ -1,0 +1,10 @@
+{
+    "python.testing.pytestArgs": [
+        "--cov",
+        "--cov-report=html:htmlcov",
+        "test"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "pylint.args": ["--rcfile=pyproject.toml"],
+}
