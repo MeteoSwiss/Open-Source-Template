@@ -17,3 +17,14 @@ def dummy_func(input_value: float) -> int:
     :rtype: int
     """
     return int(input_value)
+
+def another_dummy_func(input_value: int) -> float:
+    """
+    Another dummy function.
+
+    :param input_value: Argument to the function.
+    :type input_value: int
+    :return: A float.
+    :rtype: float
+    """
+    return float(input_value)
