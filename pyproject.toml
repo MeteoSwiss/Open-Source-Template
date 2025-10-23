@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "open-source-template"
-version = "1.0.0"
+version = "1.1.0"
 description = "A demo for the OSS template at MeteoSwiss."
 license = "BSD-3-Clause"
 authors = ["Michele Cattaneo <michele.cattaneo@meteoswiss.ch>"]
