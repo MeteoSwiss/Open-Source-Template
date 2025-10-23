@@ -1,0 +1,15 @@
+open_source_template
+====================
+
+.. py:module:: open_source_template
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/open_source_template/main/index
+
+
