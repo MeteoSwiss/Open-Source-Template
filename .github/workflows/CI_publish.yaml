@@ -1,6 +1,7 @@
 # This workflow will build and publish the Python package to PyPi and the documentation to the `gh-pages` branch of the
 # repository when a new tag is added.
-# It uses the `peaceiris/actions-gh-pages` action to handle the publishing.
+# It uses the `peaceiris/actions-gh-pages` action to handle the GitHub pages publishing and
+# `pypa/gh-action-pypi-publish@release/v1` to publish to pypi using trusted publishers feature.
 #
 # Copyright (c) 2025 MeteoSwiss, created by Michele Cattaneo; michele.cattaneo@meteoswiss.ch
 
@@ -20,8 +21,9 @@ jobs:
     needs: tests
 
     permissions:
-      # IMPORTANT: this permission is mandatory for Trusted Publishing
       id-token: write
+      contents: write
+      pages: write
 
     steps:
     - name: Checkout current repository
