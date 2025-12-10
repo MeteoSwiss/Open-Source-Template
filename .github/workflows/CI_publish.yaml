@@ -1,6 +1,7 @@
 # This workflow will build and publish the Python package to PyPi and the documentation to the `gh-pages` branch of the
 # repository when a new tag is added.
-# It uses the `peaceiris/actions-gh-pages` action to handle the publishing.
+# It uses the `peaceiris/actions-gh-pages` action to handle the GitHub pages publishing and
+# `pypa/gh-action-pypi-publish@release/v1` to publish to pypi using trusted publishers feature.
 #
 # Copyright (c) 2025 MeteoSwiss, created by Michele Cattaneo; michele.cattaneo@meteoswiss.ch
 
@@ -19,20 +20,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: tests
 
+    permissions:
+      id-token: write
+      contents: write
+      pages: write
+
     steps:
     - name: Checkout current repository
       uses: actions/checkout@v4
-
-    - name: Check version in pyproject.toml against tag
-      run: |
-        TAG=$(echo "${GITHUB_REF#refs/tags/}")
-        VERSION=$(grep '^version *= *' pyproject.toml | sed -E 's/.*= *"([^"]+)".*/\1/')
-        if [ "$TAG" != "$VERSION" ]; then
-          echo "Tag $TAG does not match pyproject version $VERSION"
-          exit 1
-        else
-          echo "Tag $TAG matches pyproject version $VERSION"
-        fi
 
     - name: Set up Python 3.12
       uses: actions/setup-python@v5
@@ -45,18 +40,15 @@ jobs:
         python -m pip install poetry
         poetry install
 
-
-    - name: Publish to TestPyPi
+    - name: Build artifacts
       run: |
-        poetry config repositories.testpypi https://test.pypi.org/legacy/
-        poetry config pypi-token.testpypi ${{ secrets.TESTPYPI_API_TOKEN }}
-        poetry publish --build -r testpypi
-        rm -rf dist/
+        poetry version ${GITHUB_REF#refs/tags/}
+        poetry build
 
     - name: Publish to PyPi
-      run: |
-        poetry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
-        poetry publish --build
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        packages-dir: dist/
 
     - name: Build documentation
       run: poetry run sphinx-build doc doc/_build
