@@ -1,11 +1,20 @@
+[![pytest]](https://img.shields.io/pypi/v/pytest.svg)](https://img.shields.io/pypi/v/pytest.svg))
+
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/Open-Source-Template.svg)](https://img.shields.io/pypi/pyversions/Open-Source-Template.svg)
+
+[![PyPI license](https://img.shields.io/pypi/l/Open-Source-Template.svg)](https://img.shields.io/pypi/l/Open-Source-Template.svg)
+
+[![CodeQL](https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/github-code-scanning/codeql)
+
+[![CI_test](https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_test.yaml/badge.svg)](https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_test.yaml)
+
+[![CI_publish_dev_documentation](https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_publish_dev_documentation.yaml/badge.svg)](https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_publish_dev_documentation.yaml)
+
 ====================
 Open Source Template
 ====================
 
 A demo for the OSS template at MeteoSwiss.
-
-
-
 
 Development Setup with Poetry
 -----------------------------
