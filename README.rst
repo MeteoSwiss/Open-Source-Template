@@ -1,14 +1,20 @@
-[![pytest]](https://img.shields.io/pypi/v/pytest.svg)](https://img.shields.io/pypi/v/pytest.svg))
+.. image:: https://img.shields.io/pypi/v/Open-Source-Template.svg
+    :target: https://pypi.org/project/Open-Source-Template/
 
-[![PyPI pyversions](https://img.shields.io/pypi/pyversions/Open-Source-Template.svg)](https://img.shields.io/pypi/pyversions/Open-Source-Template.svg)
+.. image:: https://img.shields.io/pypi/pyversions/Open-Source-Template.svg
+    :target: https://pypi.org/project/Open-Source-Template/
 
-[![PyPI license](https://img.shields.io/pypi/l/Open-Source-Template.svg)](https://img.shields.io/pypi/l/Open-Source-Template.svg)
+.. image:: https://img.shields.io/pypi/l/Open-Source-Template.svg
+    :target: https://pypi.org/project/Open-Source-Template/
 
-[![CodeQL](https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/github-code-scanning/codeql)
+.. image:: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/github-code-scanning/codeql/badge.svg
+    :target: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/github-code-scanning/codeql
 
-[![CI_test](https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_test.yaml/badge.svg)](https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_test.yaml)
+.. image:: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_test.yaml/badge.svg
+    :target: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_test.yaml
 
-[![CI_publish_dev_documentation](https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_publish_dev_documentation.yaml/badge.svg)](https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_publish_dev_documentation.yaml)
+.. image:: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_publish_dev_documentation.yaml/badge.svg
+    :target: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_publish_dev_documentation.yaml
 
 ====================
 Open Source Template
