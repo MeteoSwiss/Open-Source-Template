@@ -22,6 +22,14 @@ Open Source Template
 
 A demo for the OSS template at MeteoSwiss.
 
+The template can be use as an example how to configure MeteoSwiss Github projects.
+
+It uses:
+
+* Github actions to execute the CI/CD pipelines
+* Github pages to host the documentation
+* PyPI to publish the python packages
+
 Development Setup with Poetry
 -----------------------------
 
@@ -75,3 +83,5 @@ To install open-source-template in your project, run this command in your termin
 You can then use the library in your project through
 
     import open_source_template
+
+
