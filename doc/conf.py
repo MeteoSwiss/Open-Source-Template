@@ -86,7 +86,13 @@ html_theme = 'pydata_sphinx_theme'
 # theme further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = {
+    'switcher': {
+        'json_url': '/_static/switcher_config.json',
+        'version_match': 'dev'
+    },
+    'navbar_end': ['navbar-icon-links', 'theme-switcher', 'version-switcher']
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
