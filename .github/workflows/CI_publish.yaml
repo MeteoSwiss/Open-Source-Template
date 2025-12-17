@@ -51,6 +51,8 @@ jobs:
         packages-dir: dist/
 
     - name: Build documentation
+      env:
+        DOCUMENTATION_VERSION: ${{ github.ref_name }}
       run: poetry run sphinx-build doc doc/_build/${{ github.ref_name }}
 
     - name: Publish documentation
