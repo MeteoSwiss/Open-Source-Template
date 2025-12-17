@@ -9,8 +9,7 @@ name: CI_publish_dev_documentation
 on:
   workflow_run:
     workflows: ["CI_test"]
-#    branches: ['main']
-    branches: '**'
+    branches: ['main']
     types:
       - completed
 
