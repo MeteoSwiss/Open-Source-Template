@@ -88,7 +88,7 @@ html_theme = 'pydata_sphinx_theme'
 #
 html_theme_options = {
     'switcher': {
-        'json_url': '_static/switcher_config.json',
+        'json_url': os.getenv('DOCUMENTATION_VERSION_SWITCHER_CONFIG_URL', '_static/switcher_config.json'),
         'version_match': os.getenv('DOCUMENTATION_VERSION', 'dev')
     },
     'navbar_end': ['navbar-icon-links', 'theme-switcher', 'version-switcher']
