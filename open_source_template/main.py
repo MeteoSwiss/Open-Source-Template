@@ -1,11 +1,10 @@
-""" 
-Copyright (c) 2025 MeteoSwiss, Michele Cattaneo
+"""
+Copyright (c) 2025 MeteoSwiss, contributors listed in AUTHORS
 
 Distributed under the terms of the BSD 3-Clause License.
 
 SPDX-License-Identifier: BSD-3-Clause
 """
-
 
 def dummy_func(input_value: float) -> int:
     """
