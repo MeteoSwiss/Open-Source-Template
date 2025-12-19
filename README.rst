@@ -84,4 +84,9 @@ You can then use the library in your project through
 
     import open_source_template
 
+Releasing
+---------
 
+* Adapt CHANGELOG.rst with release information
+* Adapt ``doc/_static/switcher_config.json`` adding the new documentation URL for the release
+* Create a new Release in the Github project
