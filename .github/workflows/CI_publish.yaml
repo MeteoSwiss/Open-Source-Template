@@ -50,11 +50,6 @@ jobs:
       with:
         packages-dir: dist/
 
-    - name: Get Github Pages URL
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: GITHUB_PAGES_URL=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq '.html_url')
-
     - name: Build documentation
       env:
         DOCUMENTATION_VERSION: ${{ github.ref_name }}
