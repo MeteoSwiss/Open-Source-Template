@@ -2,6 +2,10 @@
 Changelog
 =========
 
+Version 1.2.2
+-------------
+* Use global version switcher configuration
+
 
 Version 1.2.0
 -------------
