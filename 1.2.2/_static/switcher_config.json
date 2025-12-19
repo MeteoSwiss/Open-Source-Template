@@ -1,0 +1,28 @@
+[
+  {
+    "name": "dev (unstable)",
+    "version": "dev",
+    "url": "/Open-Source-Template/"
+  },
+  {
+    "name": "1.2.2 (stable)",
+    "version": "1.2.2",
+    "url": "/Open-Source-Template/1.2.2/"
+  },
+  {
+    "version": "1.2.1",
+    "url": "/Open-Source-Template/1.2.1/"
+  },
+  {
+    "version": "1.2.0",
+    "url": "/Open-Source-Template/1.2.0/"
+  },
+  {
+    "version": "1.1.0",
+    "url": "/Open-Source-Template/1.1.0/"
+  },
+  {
+    "version": "1.0.0",
+    "url": "/Open-Source-Template/1.0.0/"
+  }
+]
