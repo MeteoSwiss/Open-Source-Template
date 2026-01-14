@@ -7,3 +7,5 @@ Open Source Template Documentation
 
    readme
    changelog
+   contributing
+   code_of_conduct
