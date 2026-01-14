@@ -4,7 +4,7 @@ Thank you for your interest in contributing to **Open Source Template**! We welc
 
 ## Code of Conduct
 
-This project adheres to the Contributor Covenant Code of Conduct. By participating, you are expected to uphold this code. Please read the full **Code of Conduct** before contributing.
+This project adheres to the Contributor Covenant Code of Conduct. By participating, you are expected to uphold this code. Please read the full [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
 
 ## How Can I Contribute?
 
