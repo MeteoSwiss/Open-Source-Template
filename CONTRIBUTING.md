@@ -1,19 +1,14 @@
-============
-Contributing
-============
+# Contributing
 
 Thank you for your interest in contributing to **Open Source Template**! We welcome contributions from the community and are grateful for your support.
 
-Code of Conduct
----------------
+## Code of Conduct
 
 This project adheres to the Contributor Covenant Code of Conduct. By participating, you are expected to uphold this code. Please read the full **Code of Conduct** before contributing.
 
-How Can I Contribute?
----------------------
+## How Can I Contribute?
 
-Reporting Bugs
-^^^^^^^^^^^^^^
+### Reporting Bugs
 
 Before creating bug reports, please check existing issues to avoid duplicates. When you create a bug report, include as many details as possible:
 
@@ -26,8 +21,7 @@ Before creating bug reports, please check existing issues to avoid duplicates. W
 
 You can report bugs using our **bug report template**.
 
-Suggesting Features
-^^^^^^^^^^^^^^^^^^^
+### Suggesting Features
 
 Feature suggestions are welcome! Please create an issue using our *feature request template* and include:
 
@@ -36,8 +30,7 @@ Feature suggestions are welcome! Please create an issue using our *feature reque
 - Explain why this feature would be useful
 - Provide examples of how it would be used
 
-Contributing Code
-^^^^^^^^^^^^^^^^^
+### Contributing Code
 
 1. Fork the repository
 2. Create a new branch for your feature or bugfix
@@ -46,117 +39,105 @@ Contributing Code
 5. Ensure all tests pass and code quality checks succeed
 6. Submit a pull request
 
-Development Setup
------------------
+## Development Setup
 
-Prerequisites
-^^^^^^^^^^^^^
+### Prerequisites
 
 - Python 3.11 or higher (up to 3.12)
 - Poetry (for dependency management)
 - Git
 
-Setting Up Your Environment
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+### Setting Up Your Environment
 
 1. Clone your fork of the repository:
 
-   .. code-block:: console
-
-       $ git clone https://github.com/YOUR-USERNAME/open-source-template.git
-       $ cd open-source-template
+   ```console
+   $ git clone https://github.com/YOUR-USERNAME/open-source-template.git
+   $ cd open-source-template
+   ```
 
 2. Install dependencies:
 
-   .. code-block:: console
-
-       $ poetry install
+   ```console
+   $ poetry install
+   ```
 
 3. Verify your setup by running the tests:
 
-   .. code-block:: console
+   ```console
+   $ poetry run pytest
+   ```
 
-       $ poetry run pytest
-
-Code Style and Quality
-----------------------
+## Code Style and Quality
 
 This project uses several tools to maintain code quality:
 
-Formatting with YAPF
-^^^^^^^^^^^^^^^^^^^^
+### Formatting with YAPF
 
-We use `YAPF <https://github.com/google/yapf>`_ for code formatting with PEP 8 style and a 120-character line limit.
+We use [YAPF](https://github.com/google/yapf) for code formatting with PEP 8 style and a 120-character line limit.
 
 Format your code before committing:
 
-.. code-block:: console
+```console
+$ poetry run yapf -r -i open_source_template
+```
 
-    $ poetry run yapf -r -i open_source_template
-
-Linting with Pylint
-^^^^^^^^^^^^^^^^^^^
+### Linting with Pylint
 
 Run pylint to check for code quality issues:
 
-.. code-block:: console
+```console
+$ poetry run pylint open_source_template
+```
 
-    $ poetry run pylint open_source_template
+The project configuration is in `pyproject.toml`. We disable certain docstring requirements but maintain other quality standards.
 
-The project configuration is in ``pyproject.toml``. We disable certain docstring requirements but maintain other quality standards.
-
-Type Checking with Mypy
-^^^^^^^^^^^^^^^^^^^^^^^
+### Type Checking with Mypy
 
 We enforce type hints throughout the codebase:
 
-.. code-block:: console
-
-    $ poetry run mypy open_source_template
+```console
+$ poetry run mypy open_source_template
+```
 
 All function definitions must include type annotations.
 
-Testing Guidelines
-------------------
+## Testing Guidelines
 
-Writing Tests
-^^^^^^^^^^^^^
+### Writing Tests
 
 - Write unit tests for all new code
-- Place tests in the ``test/`` directory
+- Place tests in the `test/` directory
 - Follow the existing test structure and naming conventions
 - Use descriptive test names that explain what is being tested
-- Aim for high code coverage (check with ``pytest-cov``)
+- Aim for high code coverage (check with `pytest-cov`)
 
-Running Tests
-^^^^^^^^^^^^^
+### Running Tests
 
 Run all tests:
 
-.. code-block:: console
-
-    $ poetry run pytest
+```console
+$ poetry run pytest
+```
 
 Run tests with coverage:
 
-.. code-block:: console
+```console
+$ poetry run pytest --cov=open_source_template --cov-report=html
+```
 
-    $ poetry run pytest --cov=open_source_template --cov-report=html
-
-Documentation
--------------
+## Documentation
 
 - Update documentation for any changed functionality
 - Add docstrings to new functions, classes, and modules
 - Follow the existing documentation style
 - Build documentation locally to verify changes:
 
-  .. code-block:: console
+  ```console
+  $ poetry run sphinx-build doc doc/_build
+  ```
 
-      $ poetry run sphinx-build doc doc/_build
-
-Pull Request Process
---------------------
+## Pull Request Process
 
 1. **Update the CHANGELOG**: Add a brief description of your changes in **CHANGELOG**
 
@@ -173,8 +154,7 @@ Pull Request Process
 
 5. **Merge**: Once approved and all checks pass, a maintainer will merge your PR
 
-Commit Messages
-^^^^^^^^^^^^^^^
+### Commit Messages
 
 Write clear, concise commit messages:
 
@@ -185,21 +165,19 @@ Write clear, concise commit messages:
 
 Example:
 
-.. code-block:: text
+```text
+Add validation for input parameters
 
-    Add validation for input parameters
+- Validate that input is not None
+- Raise ValueError for invalid types
+- Add unit tests for validation logic
+```
 
-    - Validate that input is not None
-    - Raise ValueError for invalid types
-    - Add unit tests for validation logic
-
-License
--------
+## License
 
 By contributing to this project, you agree that your contributions will be licensed under the BSD-3-Clause License.
 
-Questions?
-----------
+## Questions?
 
 If you have questions about contributing, please:
 

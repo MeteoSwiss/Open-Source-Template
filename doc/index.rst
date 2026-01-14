@@ -7,5 +7,3 @@ Open Source Template
 
    readme
    changelog
-   contributing
-   code_of_conduct
