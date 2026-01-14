@@ -1,13 +1,13 @@
-=====================
-Contributing Guide
-=====================
+============
+Contributing
+============
 
 Thank you for your interest in contributing to **Open Source Template**! We welcome contributions from the community and are grateful for your support.
 
 Code of Conduct
 ---------------
 
-This project adheres to the Contributor Covenant Code of Conduct. By participating, you are expected to uphold this code. Please read the full :doc:`Code of Conduct <code_of_conduct>` before contributing.
+This project adheres to the Contributor Covenant Code of Conduct. By participating, you are expected to uphold this code. Please read the full **Code of Conduct** before contributing.
 
 How Can I Contribute?
 ---------------------

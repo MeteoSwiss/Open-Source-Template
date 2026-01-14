@@ -1,5 +1,5 @@
-Open Source Template Documentation
-================================================
+Open Source Template
+====================
 
 .. toctree::
    :maxdepth: 2
