@@ -38,6 +38,9 @@ jobs:
         poetry install
 
     - name: Build documentation
+      env:
+        VERSION: dev
+        BUILD_ID: ${GITHUB_SHA::7}
       run: poetry run sphinx-build doc doc/_build
 
     - name: Publish documentation

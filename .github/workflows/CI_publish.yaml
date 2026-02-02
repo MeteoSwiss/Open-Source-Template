@@ -52,9 +52,10 @@ jobs:
 
     - name: Build documentation
       env:
-        DOCUMENTATION_VERSION: ${{ github.ref_name }}
+        VERSION: ${{ github.ref_name }}
+        BUILD_ID: ${GITHUB_SHA::7}
         # use the switcher config from main to show all the versions (past and future)
-        DOCUMENTATION_VERSION_SWITCHER_CONFIG_URL: ../_static/switcher_config.json
+        VERSION_SWITCHER_CONFIG_URL: ../_static/switcher_config.json
       run: poetry run sphinx-build doc doc/_build/${{ github.ref_name }}
 
     - name: Publish documentation
