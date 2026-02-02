@@ -52,10 +52,12 @@ jobs:
 
     - name: Build documentation
       env:
-        DOCUMENTATION_VERSION: ${{ github.ref_name }}
+        VERSION: ${{ github.ref_name }}
         # use the switcher config from main to show all the versions (past and future)
-        DOCUMENTATION_VERSION_SWITCHER_CONFIG_URL: ../_static/switcher_config.json
-      run: poetry run sphinx-build doc doc/_build/${{ github.ref_name }}
+        VERSION_SWITCHER_CONFIG_URL: ../_static/switcher_config.json
+        GITHUB_SHA: ${{ github.sha }}
+      # Set the buildId to the first 7 digits of the commit hash
+      run: BUILD_ID=$(echo ${GITHUB_SHA::7}) poetry run sphinx-build doc doc/_build/${{ github.ref_name }}
 
     - name: Publish documentation
       uses: peaceiris/actions-gh-pages@v3

@@ -16,9 +16,9 @@
 .. image:: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_publish_dev_documentation.yaml/badge.svg
     :target: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_publish_dev_documentation.yaml
 
-====================
-Open Source Template
-====================
+===============
+Getting Started
+===============
 
 A demo for the OSS template at MeteoSwiss.
 
