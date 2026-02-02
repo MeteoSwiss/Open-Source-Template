@@ -2,6 +2,12 @@
 Changelog
 =========
 
+Version 1.2.3
+-------------
+
+* Enhance the documentation header and footer by displaying the MCH logo in the header and the package version and build information in the footer.
+* Simplify the sphinx configuration to include only the strictly necessary settings.
+
 Version 1.2.2
 -------------
 * Use global version switcher configuration
