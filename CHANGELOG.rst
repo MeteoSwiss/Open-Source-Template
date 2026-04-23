@@ -2,6 +2,11 @@
 Changelog
 =========
 
+Version 1.3.0
+-------------
+
+* Upgrade to poetry 2.x
+
 Version 1.2.3
 -------------
 
