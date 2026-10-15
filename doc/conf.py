@@ -15,6 +15,9 @@ exclude_patterns = ["_build"]
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
 
+# Copy the content of doc/_static (e.g. switcher_config.json) to the published documentation.
+html_static_path = ["_static"]
+
 # html template settings
 html_title = project
 html_theme = "pydata_sphinx_theme"
