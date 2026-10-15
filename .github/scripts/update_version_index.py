@@ -1,7 +1,8 @@
 """Update the version index of the documentation site checked out from the gh-pages branch.
 
-Writes the version switcher configuration from the version folders found in the site and replaces the `stable` folder
-with a copy of the newest version.
+Writes the version switcher configuration from the version folders found in the site, replaces the `stable` folder
+with a copy of the newest version and writes the root page, which redirects to `stable`, or to `dev` while no version
+exists.
 """
 import argparse
 import json
@@ -13,6 +14,20 @@ from pathlib import Path
 VERSION_PATTERN = re.compile(r"(\d+)\.(\d+)\.(\d+)")
 SWITCHER_PATH = Path("_static") / "switcher_config.json"
 STABLE_FOLDER = "stable"
+DEV_FOLDER = "dev"
+REDIRECT_PAGE = """<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="0; url={target}/">
+<link rel="canonical" href="{target}/">
+<title>Redirecting</title>
+</head>
+<body>
+<a href="{target}/">Go to the documentation</a>
+</body>
+</html>
+"""
 
 
 def main(arguments: list[str] | None = None) -> None:
@@ -25,6 +40,9 @@ def main(arguments: list[str] | None = None) -> None:
     write_switcher(options.site_dir, build_switcher(versions, options.base_url))
     if versions:
         replace_stable(options.site_dir, versions[0])
+    (options.site_dir / "index.html").write_text(build_redirect_page(versions))
+    # Without this file GitHub Pages runs Jekyll, which skips the folders starting with an underscore, such as _static
+    (options.site_dir / ".nojekyll").touch()
 
 
 @dataclass(frozen=True, order=True)
@@ -45,7 +63,7 @@ def find_versions(site_dir: Path) -> list[Version]:
 
 def build_switcher(versions: list[Version], base_url: str) -> list[dict[str, str]]:
     """Return the pydata-sphinx-theme switcher entries: dev, then every version with the newest one named stable."""
-    switcher = [{"name": "dev (unstable)", "version": "dev", "url": base_url}]
+    switcher = [{"name": "dev (unstable)", "version": "dev", "url": f"{base_url}{DEV_FOLDER}/"}]
     switcher.extend({"version": str(version), "url": f"{base_url}{version}/"} for version in versions)
     if versions:
         switcher[1] = {"name": f"{versions[0]} (stable)", **switcher[1]}
@@ -63,6 +81,11 @@ def replace_stable(site_dir: Path, version: Version) -> None:
     stable_dir = site_dir / STABLE_FOLDER
     shutil.rmtree(stable_dir, ignore_errors=True)
     shutil.copytree(site_dir / str(version), stable_dir)
+
+
+def build_redirect_page(versions: list[Version]) -> str:
+    """Return the root page: a redirect to the stable documentation, or to dev while no version exists."""
+    return REDIRECT_PAGE.format(target=STABLE_FOLDER if versions else DEV_FOLDER)
 
 
 if __name__ == "__main__":

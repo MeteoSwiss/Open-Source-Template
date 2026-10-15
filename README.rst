@@ -10,11 +10,11 @@
 .. image:: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/github-code-scanning/codeql/badge.svg
     :target: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/github-code-scanning/codeql
 
-.. image:: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_test.yaml/badge.svg
-    :target: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_test.yaml
+.. image:: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/ci.yml/badge.svg
+    :target: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/ci.yml
 
-.. image:: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_publish_dev_documentation.yaml/badge.svg
-    :target: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_publish_dev_documentation.yaml
+.. image:: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/release.yml/badge.svg
+    :target: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/release.yml
 
 ===============
 Getting Started
@@ -100,7 +100,7 @@ Releases use the `GitHub CLI <https://cli.github.com/>`_ (``gh``). Replace ``X.Y
 
    Leave the version in ``pyproject.toml`` at ``0.0.0``: the pipeline sets it from the tag.
 
-The tag starts the ``CI_publish`` workflow, which:
+The tag starts the ``Release`` workflow, which runs all CI checks with the tag as version and then:
 
 * publishes the package to PyPI
 * publishes the documentation to ``https://meteoswiss.github.io/Open-Source-Template/X.Y.Z/``

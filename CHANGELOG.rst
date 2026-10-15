@@ -6,6 +6,9 @@ Version 1.3.0
 -------------
 
 * Upgrade to poetry 2.x
+* Restructure the GitHub Actions workflows into ``ci.yml`` and ``release.yml`` (see ``.github/WORKFLOWS.md``): publish
+  only after all checks pass, build the package on every pull request, and publish the dev documentation to ``dev/``
+  with the site root redirecting to ``stable/``.
 * Fix the documentation version switcher: set ``html_static_path`` so that ``doc/_static/switcher_config.json`` is
   published with the documentation again (it was no longer copied since the sphinx configuration was simplified).
 

@@ -1,0 +1,141 @@
+# Checks every pull request and push to main: lint, documentation build, tests and package build.
+# A push to main then publishes the dev documentation. release.yml calls this workflow to check and build a release.
+# See .github/WORKFLOWS.md for the design.
+#
+# Copyright (c) 2025 MeteoSwiss
+
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_call:
+    inputs:
+      version:
+        description: Version of the package and documentation to build, for example 1.3.0. Defaults to a dev version.
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # Every main commit runs to the end, so its documentation is published
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python and Poetry
+        uses: ./.github/actions/setup-python-poetry
+
+      - name: Run pylint
+        run: poetry run pylint --reports=n --output-format=parseable open_source_template
+
+      - name: Run mypy
+        run: poetry run mypy open_source_template
+
+  docs:
+    name: Docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python and Poetry
+        uses: ./.github/actions/setup-python-poetry
+
+      - name: Build documentation
+        env:
+          VERSION: ${{ inputs.version || 'dev' }}
+        run: BUILD_ID="${GITHUB_SHA::7}" poetry run sphinx-build --fail-on-warning doc doc/_build
+
+      - name: Upload documentation
+        uses: actions/upload-artifact@v7
+        with:
+          name: docs
+          path: doc/_build/
+
+  test:
+    name: Test (${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Every minor version allowed by requires-python in pyproject.toml
+        python-version: ['3.11', '3.12', '3.13']
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python and Poetry
+        uses: ./.github/actions/setup-python-poetry
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run tests
+        run: poetry run pytest --cov=open_source_template --cov-fail-under=80
+
+      - name: Run publishing script tests
+        run: poetry run pytest .github/scripts
+
+  build:
+    name: Build package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python and Poetry
+        uses: ./.github/actions/setup-python-poetry
+
+      - name: Set package version
+        env:
+          VERSION: ${{ inputs.version }}
+        # The local part (+commit) ties a dev package to its commit and makes PyPI reject it
+        run: poetry version "${VERSION:-0.0.0.dev${GITHUB_RUN_NUMBER}+${GITHUB_SHA::7}}"
+
+      - name: Build package
+        run: poetry build
+
+      - name: Upload package
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist/
+
+  deploy-docs:
+    name: Deploy dev docs
+    needs: [lint, docs, test, build]
+    # A run called from release.yml also has event push, with the tag as ref
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    # Serializes all pushes to the gh-pages branch
+    concurrency:
+      group: gh-pages
+      cancel-in-progress: false
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Download documentation
+        uses: actions/download-artifact@v8
+        with:
+          name: docs
+          path: site
+
+      - name: Publish documentation
+        uses: ./.github/actions/publish-docs
+        with:
+          site-dir: site
+          folder: dev

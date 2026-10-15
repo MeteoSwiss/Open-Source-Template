@@ -1,0 +1,29 @@
+name: Set up Python and Poetry
+description: Install Poetry, set up Python with the Poetry dependency cache and install the project with all groups.
+
+inputs:
+  python-version:
+    description: Python version to set up. Without it, the version in .python-version is used.
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    # Poetry must be installed before setup-python, which asks Poetry for its cache folder
+    - name: Install Poetry
+      shell: bash
+      env:
+        POETRY_VERSION: 2.5.1
+      run: pipx install "poetry==${POETRY_VERSION}"
+
+    - name: Set up Python
+      uses: actions/setup-python@v7
+      with:
+        python-version: ${{ inputs.python-version }}
+        python-version-file: .python-version
+        cache: poetry
+
+    - name: Install dependencies
+      shell: bash
+      run: poetry install

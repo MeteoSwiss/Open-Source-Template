@@ -1,0 +1,73 @@
+# Releases a version tag X.Y.Z: runs CI with the tag as version, publishes the package that CI built to PyPI, then
+# publishes the documentation that CI built to folder X.Y.Z of the gh-pages branch.
+# See .github/WORKFLOWS.md for the design.
+#
+# Copyright (c) 2025 MeteoSwiss, created by Michele Cattaneo; michele.cattaneo@meteoswiss.ch
+
+name: Release
+
+on:
+  push:
+    tags: ['[0-9]+.[0-9]+.[0-9]+']
+
+permissions:
+  contents: read
+
+jobs:
+
+  ci:
+    name: CI
+    uses: ./.github/workflows/ci.yml
+    with:
+      version: ${{ github.ref_name }}
+    # A called workflow can't request more than its caller grants. The dev docs job of ci.yml requests write access
+    # and is skipped for tags, but the workflow fails to start without this grant.
+    permissions:
+      contents: write
+
+  pypi:
+    name: Publish to PyPI
+    needs: ci
+    # Forks have no trusted publisher on PyPI; skipping the upload there keeps the release testable in a fork
+    if: github.repository_owner == 'MeteoSwiss'
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - name: Download package
+        uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist
+
+      - name: Publish package
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+  deploy-docs:
+    name: Deploy release docs
+    needs: [ci, pypi]
+    # A skipped pypi job (in a fork) would skip this job too; failure() covers failed ci and pypi jobs
+    if: ${{ !failure() && !cancelled() }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    # Serializes all pushes to the gh-pages branch
+    concurrency:
+      group: gh-pages
+      cancel-in-progress: false
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Download documentation
+        uses: actions/download-artifact@v8
+        with:
+          name: docs
+          path: site
+
+      - name: Publish documentation
+        uses: ./.github/actions/publish-docs
+        with:
+          site-dir: site
+          folder: ${{ github.ref_name }}

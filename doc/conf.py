@@ -15,7 +15,7 @@ exclude_patterns = ["_build"]
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
 
-# Copy the content of doc/_static (e.g. switcher_config.json) to the published documentation.
+# Copy the content of doc/_static (e.g. the logo) to the published documentation.
 html_static_path = ["_static"]
 
 # html template settings
@@ -35,7 +35,9 @@ html_theme_options = {
         "image_dark": "_static/app-icon_meteoswiss_rounded_rgb.png",
     },
     'switcher': {
-        'json_url': os.getenv('VERSION_SWITCHER_CONFIG_URL', '_static/switcher_config.json'),
+        # Every documentation build is published one folder below the site root, which holds the switcher written by
+        # .github/scripts/update_version_index.py
+        'json_url': '../_static/switcher_config.json',
         'version_match': os.getenv('VERSION', 'dev')
     },
     'navbar_end': ['navbar-icon-links', 'theme-switcher', 'version-switcher'],

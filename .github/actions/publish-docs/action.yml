@@ -1,0 +1,53 @@
+name: Publish documentation
+description: >-
+  Publish a built documentation site to one folder of the gh-pages branch, then regenerate the version switcher, the
+  stable folder and the root redirect. The job needs `contents: write`.
+
+inputs:
+  site-dir:
+    description: Folder holding the built documentation site.
+    required: true
+  folder:
+    description: Folder on gh-pages to publish to, `dev` or a version `X.Y.Z`.
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Check out gh-pages
+      uses: actions/checkout@v7
+      with:
+        ref: gh-pages
+        path: gh-pages
+
+    - name: Replace documentation folder
+      shell: bash
+      env:
+        SITE_DIR: ${{ inputs.site-dir }}
+        FOLDER: ${{ inputs.folder }}
+      run: |
+        # Guards the rm below against an empty or unexpected folder name
+        if [[ ! "${FOLDER}" =~ ^(dev|[0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+          echo "::error::Folder must be dev or X.Y.Z, got '${FOLDER}'"
+          exit 1
+        fi
+        rm --recursive --force "gh-pages/${FOLDER}"
+        cp --recursive "${SITE_DIR}" "gh-pages/${FOLDER}"
+
+    - name: Update version index
+      shell: bash
+      env:
+        BASE_URL: /${{ github.event.repository.name }}/
+      run: python3 .github/scripts/update_version_index.py gh-pages --base-url "${BASE_URL}"
+
+    - name: Commit and push
+      shell: bash
+      working-directory: gh-pages
+      env:
+        FOLDER: ${{ inputs.folder }}
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898232+github-actions[bot]@users.noreply.github.com"
+        git add --all
+        git diff --cached --quiet || git commit --message "Publish ${FOLDER} documentation of ${GITHUB_SHA}"
+        git push

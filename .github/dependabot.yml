@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    # The composite actions in .github/actions also reference actions
+    directories:
+      - /
+      - /.github/actions/*
+    schedule:
+      interval: weekly
