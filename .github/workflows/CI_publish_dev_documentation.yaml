@@ -17,6 +17,10 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
+    # Serialize all deployments to the gh-pages branch
+    concurrency:
+      group: gh-pages
+      cancel-in-progress: false
 
     permissions:
       contents: write

@@ -87,6 +87,22 @@ You can then use the library in your project through
 Releasing
 ---------
 
-* Adapt CHANGELOG.rst with release information
-* Adapt ``doc/_static/switcher_config.json`` adding the new documentation URL for the release
-* Create a new Release in the Github project
+Releases use the `GitHub CLI <https://cli.github.com/>`_ (``gh``). Replace ``X.Y.Z`` with the release version.
+
+#. Add a ``Version X.Y.Z`` section with the release changes to ``CHANGELOG.rst`` and merge it into ``main`` through a
+   pull request.
+
+#. Create the release and its tag ``X.Y.Z`` (no ``v`` prefix) on ``main``:
+
+   .. code-block:: console
+
+       $ gh release create X.Y.Z --target main --title X.Y.Z --generate-notes
+
+   Leave the version in ``pyproject.toml`` at ``0.0.0``: the pipeline sets it from the tag.
+
+The tag starts the ``CI_publish`` workflow, which:
+
+* publishes the package to PyPI
+* publishes the documentation to ``https://meteoswiss.github.io/Open-Source-Template/X.Y.Z/``
+* adds the release to the version switcher and points ``https://meteoswiss.github.io/Open-Source-Template/stable/`` to
+  the newest release

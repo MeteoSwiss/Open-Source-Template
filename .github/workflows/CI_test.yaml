@@ -46,6 +46,9 @@ jobs:
     - name: Run pytest
       run: poetry run pytest -s --cov=open_source_template --cov-fail-under=80
 
+    - name: Run tests of the documentation publishing script
+      run: poetry run pytest .github/scripts
+
     - name: Run linter
       run: poetry run pylint -rn --output-format=parseable open_source_template
 
