@@ -6,6 +6,12 @@ inputs:
     description: Python version to set up. Without it, the version in .python-version is used.
     required: false
     default: ''
+  cache:
+    description: >-
+      Restore and save the Poetry dependency cache. Turn it off in jobs whose output gets published, so a poisoned cache
+      entry can't end up in a release.
+    required: false
+    default: 'true'
 
 runs:
   using: composite
@@ -18,11 +24,14 @@ runs:
       run: pipx install "poetry==${POETRY_VERSION}"
 
     - name: Set up Python
-      uses: actions/setup-python@v7
+      # The jobs whose output gets published (docs and build in ci.yml) set the input cache to false; the linter can't
+      # evaluate that expression
+      # jactionlint ignore=cache-poisoning
+      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
       with:
         python-version: ${{ inputs.python-version }}
         python-version-file: .python-version
-        cache: poetry
+        cache: ${{ inputs.cache == 'true' && 'poetry' || '' }}
 
     - name: Install dependencies
       shell: bash

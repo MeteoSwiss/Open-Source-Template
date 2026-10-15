@@ -7,3 +7,6 @@ updates:
       - /.github/actions/*
     schedule:
       interval: weekly
+    # Gives time for a broken or compromised release to be noticed and pulled before it is proposed
+    cooldown:
+      default-days: 7

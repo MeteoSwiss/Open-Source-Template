@@ -160,7 +160,8 @@ Work that repeats across jobs lives in local composite actions, so it is defined
 
 - `.github/actions/setup-python-poetry/action.yml` installs a pinned Poetry version with `pipx`, sets up Python with
   the Poetry dependency cache and runs `poetry install`. It takes the Python version as an optional input; the default
-  comes from `.python-version`.
+  comes from `.python-version`. `docs` and `build` turn the cache off, because their output gets published on a
+  release and a poisoned cache entry would end up in it.
 - `.github/actions/publish-docs/action.yml` takes the built site and a folder name (`dev` or `X.Y.Z`). It checks out
   `gh-pages`, replaces the folder, runs `update_version_index.py`, and commits and pushes when something changed.
   Dev and release docs publish the same way, so the switcher, `stable/` and the root redirect are correct after every
