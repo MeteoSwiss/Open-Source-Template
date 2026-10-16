@@ -89,8 +89,8 @@ Releasing
 
 Releases use the `GitHub CLI <https://cli.github.com/>`_ (``gh``). Replace ``X.Y.Z`` with the release version.
 
-#. Add a ``Version X.Y.Z`` section with the release changes to ``CHANGELOG.rst`` and merge it into ``main`` through a
-   pull request.
+#. Rename the ``Upcoming`` section of ``CHANGELOG.rst`` to ``Version X.Y.Z``, add an empty ``Upcoming`` section above
+   it and merge the change into ``main`` through a pull request.
 
 #. Create the release and its tag ``X.Y.Z`` (no ``v`` prefix) on ``main``:
 

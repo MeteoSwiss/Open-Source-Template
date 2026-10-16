@@ -1,6 +1,5 @@
 # Releases a version tag X.Y.Z: runs CI with the tag as version, publishes the package that CI built to PyPI, then
 # publishes the documentation that CI built to folder X.Y.Z of the gh-pages branch.
-# See .github/WORKFLOWS.md for the design.
 #
 # Copyright (c) 2025 MeteoSwiss, created by Michele Cattaneo; michele.cattaneo@meteoswiss.ch
 

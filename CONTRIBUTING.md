@@ -133,7 +133,7 @@ $ poetry run pytest
 
 ## Pull Request Process
 
-1. **Update the CHANGELOG**: Add a brief description of your changes in **CHANGELOG**
+1. **Update the CHANGELOG**: Add a brief description of your changes to the **Upcoming** section of **CHANGELOG.rst**
 
 2. **Update AUTHORS**: If this is your first contribution, add your name to the **AUTHORS** file
 

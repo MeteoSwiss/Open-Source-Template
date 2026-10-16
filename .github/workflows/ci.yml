@@ -1,6 +1,5 @@
 # Checks every pull request and push to main: lint, documentation build, tests and package build.
 # A push to main then publishes the dev documentation. release.yml calls this workflow to check and build a release.
-# See .github/WORKFLOWS.md for the design.
 #
 # Copyright (c) 2025 MeteoSwiss
 
