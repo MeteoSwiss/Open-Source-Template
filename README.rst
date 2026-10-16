@@ -53,7 +53,7 @@ Run Quality Tools
 .. code-block:: console
 
     $ poetry run pylint open_source_template
-    $ poetry run mypy open_source_template
+    $ poetry run mypy
 
 Generate Documentation
 ''''''''''''''''''''''

@@ -97,7 +97,7 @@ The project configuration is in `pyproject.toml`. We disable certain docstring r
 We enforce type hints throughout the codebase:
 
 ```console
-$ poetry run mypy open_source_template
+$ poetry run mypy
 ```
 
 All function definitions must include type annotations.
@@ -114,16 +114,10 @@ All function definitions must include type annotations.
 
 ### Running Tests
 
-Run all tests:
+Run all tests with coverage. The HTML coverage report is written to `htmlcov/`:
 
 ```console
 $ poetry run pytest
-```
-
-Run tests with coverage:
-
-```console
-$ poetry run pytest --cov=open_source_template --cov-report=html
 ```
 
 ## Documentation

@@ -96,7 +96,7 @@ Workflow settings:
 
 - `lint` runs pylint and mypy and fails on any finding.
 - `docs` builds with the `version` input or `dev` and `--fail-on-warning` and uploads the site as artifact `docs`.
-- `test` runs pytest with coverage, then the tests in `.github/scripts`, once per Python version in `requires-python`.
+- `test` runs pytest with coverage on `test` and `.github/scripts`, once per Python version in `requires-python`.
 - `build` sets the package version, builds the package and uploads `dist/` as artifact `dist`. On pull requests and
   `main` this checks that the package builds; on a release it is the package that gets published.
 - `deploy-docs` downloads the `docs` artifact and publishes it to folder `dev`, so it publishes exactly what `docs`
@@ -136,9 +136,8 @@ Steps that do the same thing use the same name and the same implementation in ev
 | `Check out repository` | `actions/checkout` | every job |
 | `Set up Python and Poetry` | composite action `setup-python-poetry` | `lint`, `docs`, `test`, `build` |
 | `Run pylint` | `poetry run pylint open_source_template` | `lint` |
-| `Run mypy` | `poetry run mypy open_source_template` | `lint` |
+| `Run mypy` | `poetry run mypy` | `lint` |
 | `Run tests` | `poetry run pytest` with coverage | `test` |
-| `Run publishing script tests` | `poetry run pytest .github/scripts` | `test` |
 | `Build documentation` | `poetry run sphinx-build` with `VERSION` and `BUILD_ID` | `docs` |
 | `Upload documentation` | `actions/upload-artifact`, artifact `docs` | `docs` |
 | `Download documentation` | `actions/download-artifact`, artifact `docs` | both `deploy-docs` jobs |

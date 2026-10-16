@@ -41,10 +41,10 @@ jobs:
         uses: $/.github/actions/setup-python-poetry
 
       - name: Run pylint
-        run: poetry run pylint --reports=n --output-format=parseable open_source_template
+        run: poetry run pylint open_source_template
 
       - name: Run mypy
-        run: poetry run mypy open_source_template
+        run: poetry run mypy
 
   docs:
     name: Docs
@@ -93,10 +93,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Run tests
-        run: poetry run pytest --cov=open_source_template --cov-fail-under=80
-
-      - name: Run publishing script tests
-        run: poetry run pytest .github/scripts
+        run: poetry run pytest
 
   build:
     name: Build package
