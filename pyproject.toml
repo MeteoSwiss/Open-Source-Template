@@ -59,13 +59,23 @@ max-line-length = 120
 # Minimum number of public methods for a class (see R0903).
 min-public-methods = 0
 
+[tool.pylint.reports]
+output-format = "parseable"
+
 [tool.mypy]
+files = ["open_source_template"]
 ignore_missing_imports = true
 disallow_untyped_defs = true
 
+[tool.pytest.ini_options]
+testpaths = ["test", ".github/scripts"]
+addopts = ["--cov", "--cov-report=term", "--cov-report=html"]
 
 [tool.coverage.run]
-omit = ["test/**",  "doc/**"]
+source = ["open_source_template"]
+
+[tool.coverage.report]
+fail_under = 80
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

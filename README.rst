@@ -10,11 +10,11 @@
 .. image:: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/github-code-scanning/codeql/badge.svg
     :target: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/github-code-scanning/codeql
 
-.. image:: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_test.yaml/badge.svg
-    :target: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_test.yaml
+.. image:: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/ci.yml/badge.svg
+    :target: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/ci.yml
 
-.. image:: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_publish_dev_documentation.yaml/badge.svg
-    :target: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/CI_publish_dev_documentation.yaml
+.. image:: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/release.yml/badge.svg
+    :target: https://github.com/MeteoSwiss/Open-Source-Template/actions/workflows/release.yml
 
 ===============
 Getting Started
@@ -53,7 +53,7 @@ Run Quality Tools
 .. code-block:: console
 
     $ poetry run pylint open_source_template
-    $ poetry run mypy open_source_template
+    $ poetry run mypy
 
 Generate Documentation
 ''''''''''''''''''''''
@@ -87,6 +87,22 @@ You can then use the library in your project through
 Releasing
 ---------
 
-* Adapt CHANGELOG.rst with release information
-* Adapt ``doc/_static/switcher_config.json`` adding the new documentation URL for the release
-* Create a new Release in the Github project
+Releases use the `GitHub CLI <https://cli.github.com/>`_ (``gh``). Replace ``X.Y.Z`` with the release version.
+
+#. Rename the ``Upcoming`` section of ``CHANGELOG.rst`` to ``Version X.Y.Z``, add an empty ``Upcoming`` section above
+   it and merge the change into ``main`` through a pull request.
+
+#. Create the release and its tag ``X.Y.Z`` (no ``v`` prefix) on ``main``:
+
+   .. code-block:: console
+
+       $ gh release create X.Y.Z --target main --title X.Y.Z --generate-notes
+
+   Leave the version in ``pyproject.toml`` at ``0.0.0``: the pipeline sets it from the tag.
+
+The tag starts the ``Release`` workflow, which runs all CI checks with the tag as version and then:
+
+* publishes the package to PyPI
+* publishes the documentation to ``https://meteoswiss.github.io/Open-Source-Template/X.Y.Z/``
+* adds the release to the version switcher and points ``https://meteoswiss.github.io/Open-Source-Template/stable/`` to
+  the newest release
