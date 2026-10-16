@@ -52,20 +52,20 @@ Feature suggestions are welcome! Please create an issue using our *feature reque
 1. Clone your fork of the repository:
 
    ```console
-   $ git clone https://github.com/YOUR-USERNAME/open-source-template.git
-   $ cd open-source-template
+   git clone https://github.com/YOUR-USERNAME/open-source-template.git
+   cd open-source-template
    ```
 
 2. Install dependencies:
 
    ```console
-   $ poetry install
+   poetry install
    ```
 
 3. Verify your setup by running the tests:
 
    ```console
-   $ poetry run pytest
+   poetry run pytest
    ```
 
 ## Code Style and Quality
@@ -79,7 +79,7 @@ We use [YAPF](https://github.com/google/yapf) for code formatting with PEP 8 sty
 Format your code before committing:
 
 ```console
-$ poetry run yapf -r -i open_source_template
+poetry run yapf -r -i open_source_template
 ```
 
 ### Linting with Pylint
@@ -87,7 +87,7 @@ $ poetry run yapf -r -i open_source_template
 Run pylint to check for code quality issues:
 
 ```console
-$ poetry run pylint open_source_template
+poetry run pylint open_source_template
 ```
 
 The project configuration is in `pyproject.toml`. We disable certain docstring requirements but maintain other quality standards.
@@ -97,7 +97,7 @@ The project configuration is in `pyproject.toml`. We disable certain docstring r
 We enforce type hints throughout the codebase:
 
 ```console
-$ poetry run mypy
+poetry run mypy
 ```
 
 All function definitions must include type annotations.
@@ -117,7 +117,7 @@ All function definitions must include type annotations.
 Run all tests with coverage. The HTML coverage report is written to `htmlcov/`:
 
 ```console
-$ poetry run pytest
+poetry run pytest
 ```
 
 ## Documentation
@@ -128,7 +128,7 @@ $ poetry run pytest
 - Build documentation locally to verify changes:
 
   ```console
-  $ poetry run sphinx-build doc doc/_build
+  poetry run sphinx-build doc doc/_build
   ```
 
 ## Pull Request Process
